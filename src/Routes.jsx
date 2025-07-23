@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter, Routes as RouterRoutes, Route } from "react-router-dom";
-import ScrollToTop from "components/ScrollToTop";
-import ErrorBoundary from "components/ErrorBoundary";
+import ScrollToTop from "./components/ScrollToTop";
+import ErrorBoundary from "./components/ErrorBoundary";
 // Add your imports here
-import AssignmentDashboard from "pages/assignment-dashboard";
-import AiProcessingCenter from "pages/ai-processing-center";
-import AssignmentCreationWizard from "pages/assignment-creation-wizard";
-import QualityAssuranceDashboard from "pages/quality-assurance-dashboard";
-import ResearchLibrary from "pages/research-library";
-import AssignmentEditor from "pages/assignment-editor";
-import NotFound from "pages/NotFound";
+import AssignmentDashboard from "./pages/assignment-dashboard";
+import AiProcessingCenter from "./pages/ai-processing-center";
+import AssignmentCreationWizard from "./pages/assignment-creation-wizard";
+import QualityAssuranceDashboard from "./pages/quality-assurance-dashboard";
+import ResearchLibrary from "./pages/research-library";
+import AssignmentEditor from "./pages/assignment-editor";
+import NotFound from "./pages/NotFound";
 
 const Routes = () => {
   return (

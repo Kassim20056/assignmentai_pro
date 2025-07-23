@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AISetupGuide from '../../components/ui/AISetupGuide';
 import Header from '../../components/ui/Header';
 import AssignmentContextHeader from '../../components/ui/AssignmentContextHeader';
 import QuickActionFloatingButton from '../../components/ui/QuickActionFloatingButton';
@@ -33,6 +34,7 @@ const AssignmentDashboard = () => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [notifications, setNotifications] = useState([]);
+  const [showAISetup, setShowAISetup] = useState(false);
 
   // Mock assignments data
   const [assignments, setAssignments] = useState([
@@ -356,6 +358,12 @@ const AssignmentDashboard = () => {
   ];
 
   useEffect(() => {
+    // Check if AI is configured
+    const aiProvider = import.meta.env.VITE_AI_PROVIDER;
+    if (!aiProvider || aiProvider === 'undefined') {
+      setShowAISetup(true);
+    }
+    
     // Set initial selected assignment
     if (assignments.length > 0 && !selectedAssignment) {
       setSelectedAssignment(assignments.find(a => a.status === 'in-progress') || assignments[0]);
@@ -527,6 +535,12 @@ const AssignmentDashboard = () => {
         onEmergencyHelp={() => console.log('Emergency help')}
       />
 
+      {/* AI Setup Guide */}
+      {showAISetup && (
+        <AISetupGuide
+          onClose={() => setShowAISetup(false)}
+        />
+      )}
       {/* Notifications */}
       <NotificationToast
         notifications={notifications}

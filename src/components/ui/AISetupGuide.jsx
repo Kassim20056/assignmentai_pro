@@ -7,6 +7,17 @@ const AISetupGuide = ({ onClose }) => {
 
   const providers = [
     {
+      id: 'openrouter',
+      name: 'OpenRouter (Recommended)',
+      description: 'Access to multiple AI models including Claude, GPT, and more',
+      cost: 'Pay-per-use: $0.50-$15 per 1M tokens',
+      setup: 'API key required',
+      pros: ['Multiple model options', 'Competitive pricing', 'High quality', 'Fast responses'],
+      cons: ['Requires payment', 'API key needed'],
+      icon: 'Zap',
+      setupUrl: 'https://openrouter.ai'
+    },
+    {
       id: 'mock',
       name: 'Mock AI (Development)',
       description: 'Use simulated AI responses for testing and development',
@@ -177,6 +188,17 @@ const AISetupGuide = ({ onClose }) => {
                 </div>
               )}
               
+              {selectedProvider === 'openrouter' && (
+                <div className="space-y-3 text-sm text-text-secondary">
+                  <p>1. Go to <a href="https://openrouter.ai" target="_blank" className="text-primary hover:underline">OpenRouter</a> and create an account</p>
+                  <p>2. Add credits to your account (minimum $5)</p>
+                  <p>3. Generate an API key in your dashboard</p>
+                  <p>4. Copy the API key and add it to your .env file</p>
+                  <p>5. Set VITE_AI_PROVIDER=openrouter in your .env file</p>
+                  <p className="text-primary">✓ Your API key is already configured!</p>
+                </div>
+              )}
+              
               {selectedProvider === 'local' && (
                 <div className="space-y-3 text-sm text-text-secondary">
                   <p>1. Install <a href="https://ollama.ai" target="_blank" className="text-primary hover:underline">Ollama</a> on your computer</p>
@@ -202,7 +224,7 @@ const AISetupGuide = ({ onClose }) => {
               size="sm"
               onClick={onClose}
             >
-              Use Mock AI
+              {selectedProvider === 'openrouter' ? 'Use OpenRouter' : 'Use Mock AI'}
             </Button>
             {selectedProvider !== 'mock' && (
               <Button
@@ -211,7 +233,7 @@ const AISetupGuide = ({ onClose }) => {
                 iconName="ExternalLink"
                 onClick={handleSetupProvider}
               >
-                Setup {providers.find(p => p.id === selectedProvider)?.name}
+                {selectedProvider === 'openrouter' ? 'Start Using OpenRouter' : `Setup ${providers.find(p => p.id === selectedProvider)?.name}`}
               </Button>
             )}
           </div>

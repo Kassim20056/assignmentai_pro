@@ -360,8 +360,12 @@ const AssignmentDashboard = () => {
   useEffect(() => {
     // Check if AI is configured
     const aiProvider = import.meta.env.VITE_AI_PROVIDER;
-    if (!aiProvider || aiProvider === 'undefined') {
-      setShowAISetup(true);
+    const openRouterKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+    
+    // Show setup guide if no provider is configured or if OpenRouter is selected but no key
+    if (!aiProvider || aiProvider === 'undefined' || (aiProvider === 'openrouter' && !openRouterKey)) {
+      // Don't show setup since OpenRouter is already configured
+      // setShowAISetup(true);
     }
     
     // Set initial selected assignment
